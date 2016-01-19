@@ -1,0 +1,79 @@
+FORMAT: 1A
+HOST: https://v1.api.dudesolutions.io
+
+GENERATEASYNCCODE: TRUE
+USEMETHODPREFIX: TRUE
+USEMODELPOSTFIX: FALSE
+USECONTROLLERPOSTFIX: FALSE
+USEENUMPOSTFIX: FALSE
+USECONSTRUCTORSFORCONFIG: TRUE
+CSHARPDEFAULTNAMESPACE: DSI.SDK.<ApiName>
+JAVADEFAULTNAMESPACE: io.dudesolutions.<ApiName>
+BRANDLABEL: Dude Solutions, Inc.
+USERAGENT: Dude SDK
+
+# Dude Report Api
+![Dude Solutions](https://dudesolutions.com/assets/img/logo.png)
+
+## Reference
+Good reference document: https://raw.githubusercontent.com/apiaryio/api-blueprint/master/examples/Polls%20API.md
+
+## Authentication
+*<Api Name>* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
+
+New to *OAuth*?  Check out the [OAuth Bible](http://oauthbible.com/) for good reference material.
+
+## Media Types
+Where applicable this API uses the *JSON* media-type to represent resources.
+
+Requests and responses with a message-body use plain JSON to set or update resources.
+
+## Error States
+Common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used throughout this API.
+
+In addition to standard response codes the response object returned from the server during an exception event may contain additional information in the following JSON format:
+
+        {
+            "message": "SOME MESSAGE",
+            "dudeReferenceId": "3523845A-4729-4CCB-9E16-01DEADF6C2DF",
+            "stackTrace": "Null, Typically"
+        }
+        
+## Data Restriction
+Depending on the access level granted to the calling client certain data elements throughout this API will be removed and not returned.
+
+## Dates & Times
+All dates and times are represented in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format.  In addition, *<ApiName>* will always provide [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+
+The API is capable of parsing most date and time formats, however we do require UTC dates and times be provided from all calling systems.  We highly recommend you utilize the ISO-8601 standard when communicating dates and time to the API as well.
+
+## Known Issues
+None at this time
+
+## Documentation Notes
+In Progress
+
+# Group Heartbeat
+
+## Heartbeat [/heartbeat]
+The heartbeat is exposed and provided to check for availability of the service.
+Any response that does not provide a ```200 OK``` response code should be treated as an error.
+
+### GET
+
++ Response 200 (application/json)
+    + Headers
+    
+            X-Dude-Api-Limit: Unlimited or Number
+            X-Dude-Api-Remaining: Unlimited or Number
+            X-Dude-Api-Server: Api Server ID
+            
+    + Attributes (Heartbeat)
+
+# Data Structures
+
+## Heartbeat (object)
+Represents a heartbeat response.
+
+### Properties
++ `vitalCheck`: true (boolean, required) - Vital check to ensure something is online.
