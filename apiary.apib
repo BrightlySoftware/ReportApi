@@ -38,7 +38,7 @@ In addition to standard response codes the response object returned from the ser
             "dudeReferenceId": "3523845A-4729-4CCB-9E16-01DEADF6C2DF",
             "stackTrace": "Null, Typically"
         }
-        
+
 ## Data Restriction
 Depending on the access level granted to the calling client certain data elements throughout this API will be removed and not returned.
 
@@ -63,17 +63,87 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 200 (application/json)
     + Headers
-    
+
             X-Dude-Api-Limit: Unlimited or Number
             X-Dude-Api-Remaining: Unlimited or Number
             X-Dude-Api-Server: Api Server ID
-            
+
     + Attributes (Heartbeat)
+
+
+# Work Order Reports
+
+## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Asset Summary)
+
+## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Assignee Summary)
+
+## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Purpose Summary)
 
 # Data Structures
 
 ## Heartbeat (object)
-Represents a heartbeat response.
-
-### Properties
 + `vitalCheck`: true (boolean, required) - Vital check to ensure something is online.
+
+## Base Collection Response (object)
++ `page`: 1 (number, required) - #INT The current page provided in the response data.
++ `pageSize`: 1000 (number, required) - #INT The page size returned in the response data.
++ `dataSize` (number, required) - #INT The total records returned in the response.
++ `total` (number, required) - #INT The total number of records available in the collection.
+
+## Asset Summary (object)
++ `asset`: (Asset, required) - The asset for the asset summary.
++ `cost`: (Cost, required) - The cost for the asset summary.
++ `count`: (Count, required) - The counts for the asset summary.
+
+## Assignee Summary (object)
++ `assignee`: (User, required) - The assignee user for the assignee summary.
++ `count`: (Count, required) - The counts for the assignee summary.
+
+## Purpose Summary (object)
++ `purpose`: (Purpose, required) - The purpose for the purpose summary.
++ `cost`: (Cost, required) - The cost for the purpose summary.
++ `count`: (Count, required) - The counts for the purpose summary.
+
+## Cost (object)
++ `labor` (number, required) - The sum of labor costs.
++ `purchase` (number, required) - The sum of purchase costs.
++ `total` (number, required) - The total sum of all costs.
+
+## Count (object)
++ `workOrders` (number, required) - The number of workorders.
++ `laborHours` (number, required) - The number of labor hours.
+
+## Purpose (object)
++ `id` (number, required) - The unique ID for the purpose.
++ `value` (string, required) - The name of the account.
++ `isActive`: (boolean, required) - IsActive check to ensure the purpose is active.
+
+## User (object)
++ `id` (number, required) - The unique ID that represents the user.
++ `firstName` (string, required) - The first name of the user.
++ `lastName` (string, required) - The last name of the user.
++ `email` (string, required) - The email of the user.
