@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://v1.api.dudesolutions.io
+HOST: https://v1.report.dudesolutions.io
 
 GENERATEASYNCCODE: TRUE
 USEMETHODPREFIX: TRUE
@@ -54,6 +54,7 @@ None at this time
 In Progress
 
 # Group Heartbeat
+Check health of dependant services
 
 ## Heartbeat [/heartbeat]
 The heartbeat is exposed and provided to check for availability of the service.
@@ -70,7 +71,16 @@ Any response that does not provide a ```200 OK``` response code should be treate
             
     + Attributes (Heartbeat)
 
-# Export Action [/accounts/{accountId}/export/workorders]
+# Group Export
+
+## Work Orders [/accounts/{accountId}/export/workorders]
+Work order export endpoint
+
++ Parameters
+    + accountId: 1 (required, number) - ID of the account in the form of an integer
+
+### GET
+
 
 + Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
     + Headers
