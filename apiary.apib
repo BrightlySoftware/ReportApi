@@ -71,37 +71,78 @@ Any response that does not provide a ```200 OK``` response code should be treate
     + Attributes (Heartbeat)
 
 
-# Work Order Reports
+# Group Reports
 
-## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary]
+## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby}]
 
 + Parameters
     + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + assetId: 1 (required, number) #INT ID of the asset in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
 
 + Response 200 (application/json; charset=utf-8)
-    + Attributes (Asset Summary)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Failure Reason], required)
 
-## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary]
+## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby}]
 
 + Parameters
     + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
 
 + Response 200 (application/json; charset=utf-8)
-    + Attributes (Assignee Summary)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Summary], required)
 
-## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary]
+## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby}]
 
 + Parameters
     + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
 
 + Response 200 (application/json; charset=utf-8)
-    + Attributes (Purpose Summary)
+    + Attributes (Base Collection Response)
+        + `data` (array[Assignee Summary], required)
+
+## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Failure Summary], required)
+
+## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Purpose Summary], required)
 
 # Data Structures
 
@@ -114,19 +155,36 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `dataSize` (number, required) - #INT The total records returned in the response.
 + `total` (number, required) - #INT The total number of records available in the collection.
 
+## Asset Failure Reason (object)
++ `failureReason` (Failure Reason, required) - The failure reason for the asset failure reason.
++ `count`: 0 (number, required) - The number of failure reasons.
+
 ## Asset Summary (object)
-+ `asset`: (Asset, required) - The asset for the asset summary.
-+ `cost`: (Cost, required) - The cost for the asset summary.
-+ `count`: (Count, required) - The counts for the asset summary.
++ `asset` (Asset, required) - The asset for the asset summary.
++ `cost` (Cost, required) - The cost for the asset summary.
++ `count` (Count, required) - The counts for the asset summary.
 
 ## Assignee Summary (object)
-+ `assignee`: (User, required) - The assignee user for the assignee summary.
-+ `count`: (Count, required) - The counts for the assignee summary.
++ `assignee` (User, required) - The assignee user for the assignee summary.
++ `count` (Count, required) - The counts for the assignee summary.
+
+## Failure Summary (object)
++ `asset` (Asset, required) - The asset for the failure summary.
++ `failureReason` (Failure Reason, required) - The failure reason for the failure summary.
++ `failureDetail` (Failure Detail, required) - The failure detail for the failure summary.
 
 ## Purpose Summary (object)
-+ `purpose`: (Purpose, required) - The purpose for the purpose summary.
-+ `cost`: (Cost, required) - The cost for the purpose summary.
-+ `count`: (Count, required) - The counts for the purpose summary.
++ `purpose` (Purpose, required) - The purpose for the purpose summary.
++ `cost` (Cost, required) - The cost for the purpose summary.
++ `count` (Count, required) - The counts for the purpose summary.
+
+## Asset (object)
++ `id` (number, required) - The unique ID for the asset.
++ `value` (string, required) - The name of the asset.
++ `isActive` (boolean, required) - IsActive check to ensure the asset is active.
++ `description` (string, optional) - The name of the asset.
++ `AncestorIdPath` (string, required) - The anscestor id path.
++ `AncestorNamePath` (string, required) - The anscestor name path.
 
 ## Cost (object)
 + `labor` (number, required) - The sum of labor costs.
@@ -137,10 +195,19 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `workOrders` (number, required) - The number of workorders.
 + `laborHours` (number, required) - The number of labor hours.
 
+## Failure Detail (object)
++ `failures` (number, required) - The number of failures.
++ `downtimeMinutes` (number, required) - The number of downtime minutes.
+
+## Failure Reason (object)
++ `id` (number, required) - The unique ID for the failure reason.
++ `name` (string, required) - The name of the failure reason.
++ `isActive` (boolean, required) - IsActive check to ensure the failure reason is active.
+
 ## Purpose (object)
 + `id` (number, required) - The unique ID for the purpose.
-+ `value` (string, required) - The name of the account.
-+ `isActive`: (boolean, required) - IsActive check to ensure the purpose is active.
++ `value` (string, required) - The name of the purpose.
++ `isActive` (boolean, required) - IsActive check to ensure the purpose is active.
 
 ## User (object)
 + `id` (number, required) - The unique ID that represents the user.
