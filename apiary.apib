@@ -1,14 +1,16 @@
 FORMAT: 1A
 HOST: https://v1.report.dudesolutions.io
 
+USECOMMONSDKLIBRARY: TRUE
 GENERATEASYNCCODE: TRUE
+GENERATEINTERFACES: TRUE
 USEMETHODPREFIX: TRUE
 USEMODELPOSTFIX: FALSE
 USECONTROLLERPOSTFIX: FALSE
 USEENUMPOSTFIX: FALSE
 USECONSTRUCTORSFORCONFIG: TRUE
-CSHARPDEFAULTNAMESPACE: DSI.SDK.<ApiName>
-JAVADEFAULTNAMESPACE: io.dudesolutions.<ApiName>
+CSHARPDEFAULTNAMESPACE: DSI.SDK.Report
+JAVADEFAULTNAMESPACE: io.dudesolutions.report
 BRANDLABEL: Dude Solutions, Inc.
 USERAGENT: Dude SDK
 
@@ -19,7 +21,7 @@ USERAGENT: Dude SDK
 Good reference document: https://raw.githubusercontent.com/apiaryio/api-blueprint/master/examples/Polls%20API.md
 
 ## Authentication
-*<Api Name>* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
+*Report Api* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
 
 New to *OAuth*?  Check out the [OAuth Bible](http://oauthbible.com/) for good reference material.
 
