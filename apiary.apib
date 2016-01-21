@@ -157,7 +157,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 ## Asset Failure Reason (object)
 + `failureReason` (Failure Reason, required) - The failure reason for the asset failure reason.
-+ `count`: 0 (number, required) - The number of failure reasons.
++ `count`: 0 (number, required) - #INT The number of failure reasons.
 
 ## Asset Summary (object)
 + `asset` (Asset, required) - The asset for the asset summary.
@@ -179,7 +179,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `count` (Count, required) - The counts for the purpose summary.
 
 ## Asset (object)
-+ `id` (number, required) - The unique ID for the asset.
++ `id` (number, required) - #INT The unique ID for the asset.
 + `value` (string, required) - The name of the asset.
 + `isActive` (boolean, required) - IsActive check to ensure the asset is active.
 + `description` (string, optional) - The name of the asset.
@@ -187,30 +187,30 @@ Any response that does not provide a ```200 OK``` response code should be treate
 + `AncestorNamePath` (string, required) - The anscestor name path.
 
 ## Cost (object)
-+ `labor` (number, required) - The sum of labor costs.
-+ `purchase` (number, required) - The sum of purchase costs.
-+ `total` (number, required) - The total sum of all costs.
++ `labor` (number, required) - #INT The sum of labor costs.
++ `purchase` (number, required) - #INT The sum of purchase costs.
++ `total` (number, required) - #INT The total sum of all costs.
 
 ## Count (object)
-+ `workOrders` (number, required) - The number of workorders.
-+ `laborHours` (number, required) - The number of labor hours.
++ `workOrders` (number, required) - #INT The number of workorders.
++ `laborHours` (number, required) - #INT The number of labor hours.
 
 ## Failure Detail (object)
-+ `failures` (number, required) - The number of failures.
-+ `downtimeMinutes` (number, required) - The number of downtime minutes.
++ `failures` (number, required) - #INT The number of failures.
++ `downtimeMinutes` (number, required) - #INT The number of downtime minutes.
 
 ## Failure Reason (object)
-+ `id` (number, required) - The unique ID for the failure reason.
++ `id` (number, required) - #INT The unique ID for the failure reason.
 + `name` (string, required) - The name of the failure reason.
 + `isActive` (boolean, required) - IsActive check to ensure the failure reason is active.
 
 ## Purpose (object)
-+ `id` (number, required) - The unique ID for the purpose.
++ `id` (number, required) - #INT The unique ID for the purpose.
 + `value` (string, required) - The name of the purpose.
 + `isActive` (boolean, required) - IsActive check to ensure the purpose is active.
 
 ## User (object)
-+ `id` (number, required) - The unique ID that represents the user.
++ `id` (number, required) - #INT The unique ID that represents the user.
 + `firstName` (string, required) - The first name of the user.
 + `lastName` (string, required) - The last name of the user.
 + `email` (string, required) - The email of the user.
