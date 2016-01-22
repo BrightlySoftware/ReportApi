@@ -98,15 +98,16 @@ Work order export endpoint
     + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
 
 ### GET
-+ Response 200 (application/octet-stream)
+This returns an excel document as results.
+
++ Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
     + Headers
     
             Cache-Control:no-cache
             Connection:keep-alive
             Content-Disposition:attachment; filename=WorkOrderExport_2016-01-22.xlsx
             Content-Length:8306
-    + Body
-    
+
 
 # Data Structures
 
