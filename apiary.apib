@@ -1,14 +1,16 @@
 FORMAT: 1A
-HOST: https://v1.api.dudesolutions.io
+HOST: https://v1.report.dudesolutions.io
 
+USECOMMONSDKLIBRARY: TRUE
 GENERATEASYNCCODE: TRUE
+GENERATEINTERFACES: TRUE
 USEMETHODPREFIX: TRUE
 USEMODELPOSTFIX: FALSE
 USECONTROLLERPOSTFIX: FALSE
 USEENUMPOSTFIX: FALSE
 USECONSTRUCTORSFORCONFIG: TRUE
-CSHARPDEFAULTNAMESPACE: DSI.SDK.<ApiName>
-JAVADEFAULTNAMESPACE: io.dudesolutions.<ApiName>
+CSHARPDEFAULTNAMESPACE: DSI.SDK.Report
+JAVADEFAULTNAMESPACE: io.dudesolutions.report
 BRANDLABEL: Dude Solutions, Inc.
 USERAGENT: Dude SDK
 
@@ -19,9 +21,11 @@ USERAGENT: Dude SDK
 Good reference document: https://raw.githubusercontent.com/apiaryio/api-blueprint/master/examples/Polls%20API.md
 
 ## Authentication
-*<Api Name>* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
+*Report Api* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
 
 New to *OAuth*?  Check out the [OAuth Bible](http://oauthbible.com/) for good reference material.
+
+Report API also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*) 
 
 ## Media Types
 Where applicable this API uses the *JSON* media-type to represent resources.
@@ -54,6 +58,7 @@ None at this time
 In Progress
 
 # Group Heartbeat
+Check health of dependant services
 
 ## Heartbeat [/heartbeat]
 The heartbeat is exposed and provided to check for availability of the service.
@@ -70,10 +75,59 @@ Any response that does not provide a ```200 OK``` response code should be treate
             
     + Attributes (Heartbeat)
 
+# Group Export
+
+## Work Orders [/accounts/{accountId}/export/workorders{?orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset}]
+Work order export endpoint
+
++ Parameters
+    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q (string, optional) - A free form filter mechanism.
+    + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
+    + assignees: 1 (array[number], optional) - Filter by assignees.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
+    + createdby: 1 (number, optional) - #INT Filter by the user who created the work order.
+    + displayid: 123 (string, optional) - #INT Filter by the display ID of the work order.
+    + priority: Low (array[Priority], optional) - Filter by the priority of work orders.
+    + purpose: 1 (array[number], optional) - Filter by the purpose of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
+    + requestedby: 1 (array[number], optional) - Filter by the work order requester.
+    + status: NewRequest (array[Work Order Status], optional) - Filter by the work order status.
+    + workcategory: 1 (array[number], optional) - Filter by the work category assigned to the work order.
+    + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
+
+### GET
+This returns an excel document as results.
+
++ Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+    + Headers
+    
+            Cache-Control:no-cache
+            Connection:keep-alive
+            Content-Disposition:attachment; filename=WorkOrderExport_2016-01-22.xlsx
+            Content-Length:8306
+
+
 # Data Structures
 
 ## Heartbeat (object)
 Represents a heartbeat response.
 
 ### Properties
-+ `vitalCheck`: true (boolean, required) - Vital check to ensure something is online.
++ `cachevitalcheck`: true (boolean, required) - true is cache is online.
++ `reportdbvitalcheck`: true (boolean, required) - true if ReportDB is online
+
+## Work Order Status (enum)
++ NewRequest (string)
++ WorkInProgress (string)
++ Completed (string)
++ Void (string)
+
+## Priority (enum)
++ Low (string)
++ Medium (string)
++ High (string)
++ Emergency (string)
