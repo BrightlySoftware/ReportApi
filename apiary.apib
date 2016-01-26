@@ -25,7 +25,7 @@ Good reference document: https://raw.githubusercontent.com/apiaryio/api-blueprin
 
 New to *OAuth*?  Check out the [OAuth Bible](http://oauthbible.com/) for good reference material.
 
-Report API also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*) 
+Report API also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*)
 
 ## Media Types
 Where applicable this API uses the *JSON* media-type to represent resources.
@@ -42,7 +42,7 @@ In addition to standard response codes the response object returned from the ser
             "dudeReferenceId": "3523845A-4729-4CCB-9E16-01DEADF6C2DF",
             "stackTrace": "Null, Typically"
         }
-        
+
 ## Data Restriction
 Depending on the access level granted to the calling client certain data elements throughout this API will be removed and not returned.
 
@@ -68,12 +68,13 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 200 (application/json)
     + Headers
-    
+
             X-Dude-Api-Limit: Unlimited or Number
             X-Dude-Api-Remaining: Unlimited or Number
             X-Dude-Api-Server: Api Server ID
-            
+
     + Attributes (Heartbeat)
+
 
 # Group Export
 
@@ -104,12 +105,84 @@ This returns an excel document as results.
 
 + Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
     + Headers
-    
+
             Cache-Control:no-cache
             Connection:keep-alive
             Content-Disposition:attachment; filename=WorkOrderExport_2016-01-22.xlsx
             Content-Length:8306
 
+# Group Reports
+
+## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + assetId: 1 (required, number) #INT ID of the asset in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Failure Reason], required)
+
+## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Summary], required)
+
+## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Assignee Summary], required)
+
+## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Failure Summary], required)
+
+## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Purpose Summary], required)
 
 # Data Structures
 
@@ -119,6 +192,12 @@ Represents a heartbeat response.
 ### Properties
 + `cachevitalcheck`: true (boolean, required) - true is cache is online.
 + `reportdbvitalcheck`: true (boolean, required) - true if ReportDB is online
+
+## Base Collection Response (object)
++ `page`: 1 (number, required) - #INT The current page provided in the response data.
++ `pageSize`: 1000 (number, required) - #INT The page size returned in the response data.
++ `dataSize` (number, required) - #INT The total records returned in the response.
++ `total` (number, required) - #INT The total number of records available in the collection.
 
 ## Work Order Status (enum)
 + NewRequest (string)
@@ -131,3 +210,63 @@ Represents a heartbeat response.
 + Medium (string)
 + High (string)
 + Emergency (string)
+
+## Asset Failure Reason (object)
++ `failureReason` (Failure Reason, required) - The failure reason for the asset failure reason.
++ `count`: 0 (number, required) - #INT The number of failure reasons.
+
+## Asset Summary (object)
++ `asset` (Asset, required) - The asset for the asset summary.
++ `cost` (Cost, required) - The cost for the asset summary.
++ `count` (Count, required) - The counts for the asset summary.
+
+## Assignee Summary (object)
++ `assignee` (User, required) - The assignee user for the assignee summary.
++ `count` (Count, required) - The counts for the assignee summary.
+
+## Failure Summary (object)
++ `asset` (Asset, required) - The asset for the failure summary.
++ `failureReason` (Failure Reason, required) - The failure reason for the failure summary.
++ `failureDetail` (Failure Detail, required) - The failure detail for the failure summary.
+
+## Purpose Summary (object)
++ `purpose` (Purpose, required) - The purpose for the purpose summary.
++ `cost` (Cost, required) - The cost for the purpose summary.
++ `count` (Count, required) - The counts for the purpose summary.
+
+## Asset (object)
++ `id` (number, required) - #INT The unique ID for the asset.
++ `value` (string, required) - The name of the asset.
++ `isActive` (boolean, required) - IsActive check to ensure the asset is active.
++ `description` (string, optional) - The name of the asset.
++ `AncestorIdPath` (string, required) - The anscestor id path.
++ `AncestorNamePath` (string, required) - The anscestor name path.
+
+## Cost (object)
++ `labor` (number, required) - The sum of labor costs.
++ `purchase` (number, required) - The sum of purchase costs.
++ `total` (number, required) - The total sum of all costs.
+
+## Count (object)
++ `workOrders` (number, required) - #INT The number of workorders.
++ `laborHours` (number, required) - The number of labor hours.
+
+## Failure Detail (object)
++ `failures` (number, required) - #INT The number of failures.
++ `downtimeMinutes` (number, required) - #INT The number of downtime minutes.
+
+## Failure Reason (object)
++ `id` (number, required) - #INT The unique ID for the failure reason.
++ `name` (string, required) - The name of the failure reason.
++ `isActive` (boolean, required) - IsActive check to ensure the failure reason is active.
+
+## Purpose (object)
++ `id` (number, required) - #INT The unique ID for the purpose.
++ `value` (string, required) - The name of the purpose.
++ `isActive` (boolean, required) - IsActive check to ensure the purpose is active.
+
+## User (object)
++ `id` (number, required) - #INT The unique ID that represents the user.
++ `firstName` (string, required) - The first name of the user.
++ `lastName` (string, required) - The last name of the user.
++ `email` (string, required) - The email of the user.
