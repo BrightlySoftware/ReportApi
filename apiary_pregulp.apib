@@ -25,7 +25,7 @@ Good reference document: https://raw.githubusercontent.com/apiaryio/api-blueprin
 
 New to *OAuth*?  Check out the [OAuth Bible](http://oauthbible.com/) for good reference material.
 
-Report API also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*)
+Report API also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*) 
 
 ## Media Types
 Where applicable this API uses the *JSON* media-type to represent resources.
@@ -42,7 +42,7 @@ In addition to standard response codes the response object returned from the ser
             "dudeReferenceId": "3523845A-4729-4CCB-9E16-01DEADF6C2DF",
             "stackTrace": "Null, Typically"
         }
-
+        
 ## Data Restriction
 Depending on the access level granted to the calling client certain data elements throughout this API will be removed and not returned.
 
@@ -68,11 +68,11 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 + Response 200 (application/json)
     + Headers
-
+    
             X-Dude-Api-Limit: Unlimited or Number
             X-Dude-Api-Remaining: Unlimited or Number
             X-Dude-Api-Server: Api Server ID
-
+            
     + Attributes (Heartbeat)
 
 # Group Export
@@ -104,11 +104,12 @@ This returns an excel document as results.
 
 + Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
     + Headers
-
+    
             Cache-Control:no-cache
             Connection:keep-alive
             Content-Disposition:attachment; filename=WorkOrderExport_2016-01-22.xlsx
             Content-Length:8306
+
 
 # Data Structures
 
@@ -119,14 +120,14 @@ Represents a heartbeat response.
 + `cachevitalcheck`: true (boolean, required) - true is cache is online.
 + `reportdbvitalcheck`: true (boolean, required) - true if ReportDB is online
 
-## Priority (enum)
-+ Low (string)
-+ Medium (string)
-+ High (string)
-+ Emergency (string)
-
 ## Work Order Status (enum)
 + NewRequest (string)
 + WorkInProgress (string)
 + Completed (string)
 + Void (string)
+
+## Priority (enum)
++ Low (string)
++ Medium (string)
++ High (string)
++ Emergency (string)

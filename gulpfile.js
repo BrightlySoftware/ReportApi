@@ -11,8 +11,8 @@ var gulp = require('gulp'),
   template = require('gulp-template');
 
 var srcDir = './src/**/*.apib',
-  outDir = './build/',
-  outFile = 'output.apib';
+  outDir = './',
+  outFile = 'apiary.apib';
 
 gulp.task('default', ['build']);
 
@@ -32,8 +32,8 @@ gulp.task('main', function() {
   gulp.src(srcDir)
     .pipe(template(config))
     .pipe(soften(4))
-    .pipe(concat('output.apib'))
-    .pipe(gulp.dest('./build/'));
+    .pipe(concat(outFile))
+    .pipe(gulp.dest(outDir));
 });
 
 gulp.task('publish', shell.task([
