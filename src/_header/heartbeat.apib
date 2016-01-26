@@ -1,0 +1,17 @@
+# Group Heartbeat
+Check health of dependant services
+
+## Heartbeat [/heartbeat]
+The heartbeat is exposed and provided to check for availability of the service.
+Any response that does not provide a ```200 OK``` response code should be treated as an error.
+
+### GET
+
++ Response 200 (application/json)
+    + Headers
+
+            X-Dude-Api-Limit: Unlimited or Number
+            X-Dude-Api-Remaining: Unlimited or Number
+            X-Dude-Api-Server: Api Server ID
+
+    + Attributes (Heartbeat)
