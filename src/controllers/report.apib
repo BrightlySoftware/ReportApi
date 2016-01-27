@@ -1,0 +1,72 @@
+# Group Reports
+
+## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + assetId: 1 (required, number) #INT ID of the asset in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Failure Reason], required)
+
+## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Summary], required)
+
+## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Assignee Summary], required)
+
+## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Failure Summary], required)
+
+## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Purpose Summary], required)

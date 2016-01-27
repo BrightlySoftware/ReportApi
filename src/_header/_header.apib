@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://v1.report.dudesolutions.io
+HOST: <%= api.url %>
 
 USECOMMONSDKLIBRARY: TRUE
 GENERATEASYNCCODE: TRUE
@@ -14,18 +14,15 @@ JAVADEFAULTNAMESPACE: io.dudesolutions.report
 BRANDLABEL: Dude Solutions, Inc.
 USERAGENT: Dude SDK
 
-# Dude Report Api
+# <%= api.name %>
 ![Dude Solutions](https://dudesolutions.com/assets/img/logo.png)
 
-## Reference
-Good reference document: https://raw.githubusercontent.com/apiaryio/api-blueprint/master/examples/Polls%20API.md
-
 ## Authentication
-*Report Api* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
+*<%= api.name %>* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
 
 New to *OAuth*?  Check out the [OAuth Bible](http://oauthbible.com/) for good reference material.
 
-Report API also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*)
+*<%= api.name %>* also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*)
 
 ## Media Types
 Where applicable this API uses the *JSON* media-type to represent resources.
@@ -47,7 +44,7 @@ In addition to standard response codes the response object returned from the ser
 Depending on the access level granted to the calling client certain data elements throughout this API will be removed and not returned.
 
 ## Dates & Times
-All dates and times are represented in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format.  In addition, *<ApiName>* will always provide [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+All dates and times are represented in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format.  In addition, *<%= api.name %>* will always provide [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
 The API is capable of parsing most date and time formats, however we do require UTC dates and times be provided from all calling systems.  We highly recommend you utilize the ISO-8601 standard when communicating dates and time to the API as well.
 

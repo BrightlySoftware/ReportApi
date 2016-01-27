@@ -14,18 +14,15 @@ JAVADEFAULTNAMESPACE: io.dudesolutions.report
 BRANDLABEL: Dude Solutions, Inc.
 USERAGENT: Dude SDK
 
-# Dude Report Api
+# Dude Report API
 ![Dude Solutions](https://dudesolutions.com/assets/img/logo.png)
 
-## Reference
-Good reference document: https://raw.githubusercontent.com/apiaryio/api-blueprint/master/examples/Polls%20API.md
-
 ## Authentication
-*Report Api* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
+*Dude Report API* uses OAuth v2 Authentication. First you create a new (or acquire existing) OAuth v2 token using [DudeAuth](https://www.dudeauth.com/).
 
 New to *OAuth*?  Check out the [OAuth Bible](http://oauthbible.com/) for good reference material.
 
-Report API also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*)
+*Dude Report API* also allows a bearer token to be passed in the query string. (i.e. /somepath?accessToken=*token*)
 
 ## Media Types
 Where applicable this API uses the *JSON* media-type to represent resources.
@@ -47,7 +44,7 @@ In addition to standard response codes the response object returned from the ser
 Depending on the access level granted to the calling client certain data elements throughout this API will be removed and not returned.
 
 ## Dates & Times
-All dates and times are represented in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format.  In addition, *<ApiName>* will always provide [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+All dates and times are represented in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format.  In addition, *Dude Report API* will always provide [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
 The API is capable of parsing most date and time formats, however we do require UTC dates and times be provided from all calling systems.  We highly recommend you utilize the ISO-8601 standard when communicating dates and time to the API as well.
 
@@ -83,7 +80,7 @@ Work order export endpoint
 + Parameters
     + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
-    + q (string, optional) - A free form filter mechanism.
+    + q: lightbulb (string, optional) - A free form filter mechanism.
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
     + assignees: 1 (array[number], optional) - Filter by assignees.
     + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
@@ -110,6 +107,79 @@ This returns an excel document as results.
             Content-Disposition:attachment; filename=WorkOrderExport_2016-01-22.xlsx
             Content-Length:8306
 
+# Group Reports
+
+## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + assetId: 1 (required, number) #INT ID of the asset in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Failure Reason], required)
+
+## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Summary], required)
+
+## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Assignee Summary], required)
+
+## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Failure Summary], required)
+
+## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby}]
+
++ Parameters
+    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
+    + page: 1 (number, optional) - #INT The page to request from the collection.
+    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Purpose Summary], required)
+
 # Data Structures
 
 ## Heartbeat (object)
@@ -119,11 +189,77 @@ Represents a heartbeat response.
 + `cachevitalcheck`: true (boolean, required) - true is cache is online.
 + `reportdbvitalcheck`: true (boolean, required) - true if ReportDB is online
 
+## Asset (object)
++ `id` (number, required) - #INT The unique ID for the asset.
++ `value` (string, required) - The name of the asset.
++ `isActive` (boolean, required) - IsActive check to ensure the asset is active.
++ `description` (string, optional) - The name of the asset.
++ `AncestorIdPath` (string, required) - The anscestor id path.
++ `AncestorNamePath` (string, required) - The anscestor name path.
+
+## Asset Failure Reason (object)
++ `failureReason` (Failure Reason, required) - The failure reason for the asset failure reason.
++ `count`: 0 (number, required) - #INT The number of failure reasons.
+
+## Asset Summary (object)
++ `asset` (Asset, required) - The asset for the asset summary.
++ `cost` (Cost, required) - The cost for the asset summary.
++ `count` (Count, required) - The counts for the asset summary.
+
+## Assignee Summary (object)
++ `assignee` (User, required) - The assignee user for the assignee summary.
++ `count` (Count, required) - The counts for the assignee summary.
+
+## Base Collection Response (object)
++ `page`: 1 (number, required) - #INT The current page provided in the response data.
++ `pageSize`: 1000 (number, required) - #INT The page size returned in the response data.
++ `dataSize` (number, required) - #INT The total records returned in the response.
++ `total` (number, required) - #INT The total number of records available in the collection.
+
+## Cost (object)
++ `labor` (number, required) - The sum of labor costs.
++ `purchase` (number, required) - The sum of purchase costs.
++ `total` (number, required) - The total sum of all costs.
+
+## Count (object)
++ `workOrders` (number, required) - #INT The number of workorders.
++ `laborHours` (number, required) - The number of labor hours.
+
+## Failure Detail (object)
++ `failures` (number, required) - #INT The number of failures.
++ `downtimeMinutes` (number, required) - #INT The number of downtime minutes.
+
+## Failure Reason (object)
++ `id` (number, required) - #INT The unique ID for the failure reason.
++ `name` (string, required) - The name of the failure reason.
++ `isActive` (boolean, required) - IsActive check to ensure the failure reason is active.
+
+## Failure Summary (object)
++ `asset` (Asset, required) - The asset for the failure summary.
++ `failureReason` (Failure Reason, required) - The failure reason for the failure summary.
++ `failureDetail` (Failure Detail, required) - The failure detail for the failure summary.
+
 ## Priority (enum)
 + Low (string)
 + Medium (string)
 + High (string)
 + Emergency (string)
+
+## Purpose (object)
++ `id` (number, required) - #INT The unique ID for the purpose.
++ `value` (string, required) - The name of the purpose.
++ `isActive` (boolean, required) - IsActive check to ensure the purpose is active.
+
+## Purpose Summary (object)
++ `purpose` (Purpose, required) - The purpose for the purpose summary.
++ `cost` (Cost, required) - The cost for the purpose summary.
++ `count` (Count, required) - The counts for the purpose summary.
+
+## User (object)
++ `id` (number, required) - #INT The unique ID that represents the user.
++ `firstName` (string, required) - The first name of the user.
++ `lastName` (string, required) - The last name of the user.
++ `email` (string, required) - The email of the user.
 
 ## Work Order Status (enum)
 + NewRequest (string)
