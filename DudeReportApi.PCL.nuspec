@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DSI.SDK.SecurityApi</id>
+    <title>Auto Generated Security Api SDK</title>
+    <version>$version$</version>
+    <authors>Dude Solutions, Inc.</authors>
+    <owners>Dude Solutions, Inc.</owners>
+    <copyright>Copyright © 2016 Dude Solutions, Inc. - All Rights Reserved</copyright>
+     <projectUrl>https://github.com/DudeSolutions/DudeSecurityApi</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Auto Generated Procurement API SDK</description>
+    <language>en-US</language>
+    <tags>sdk security api</tags>
+    <dependencies>
+      <group targetFramework="net45">
+		  <dependency id="Microsoft.Bcl" version="1.1.10" />
+		  <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
+		  <dependency id="Microsoft.Net.Http" version="2.2.29" />
+		  <dependency id="Newtonsoft.Json" version="6.0.8" />
+		  <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+		  <dependency id="Unirest-APIMATIC" version="1.0.0.2" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="code\DudeSecurityApi.PCL\bin\$configuration$\DudeSecurityApi.PCL.dll" target="lib\net45" />
+  </files>
+</package>

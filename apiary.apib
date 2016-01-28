@@ -82,15 +82,15 @@ Any response that does not provide a ```200 OK``` response code should be treate
 Work order export endpoint
 
 + Parameters
-    + accountId: 1 (required, number) - #INT ID of the account in the form of an integer
+    + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - A free form filter mechanism.
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
     + assignees: 1 (array[number], optional) - Filter by assignees.
     + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
-    + createdby: 1 (number, optional) - #INT Filter by the user who created the work order.
-    + displayid: 123 (string, optional) - #INT Filter by the display ID of the work order.
+    + createdby: 1 (number, optional) - {INT} Filter by the user who created the work order.
+    + displayid: 123 (string, optional) - {INT} Filter by the display ID of the work order.
     + priority: Low (array[Priority], optional) - Filter by the priority of work orders.
     + purpose: 1 (array[number], optional) - Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
@@ -101,9 +101,10 @@ Work order export endpoint
     + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
 
 ### GET
-This returns an excel document as results.
 
 + Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+    This returns an excel document as results. {HTTPRESPONSE}
+
     + Headers
 
             Cache-Control:no-cache
@@ -116,10 +117,10 @@ This returns an excel document as results.
 ## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby}]
 
 + Parameters
-    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
-    + assetId: 1 (required, number) #INT ID of the asset in the form of an integer
-    + page: 1 (number, optional) - #INT The page to request from the collection.
-    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + assetId: 1 (required, number) {INT} ID of the asset in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
@@ -131,9 +132,9 @@ This returns an excel document as results.
 ## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby}]
 
 + Parameters
-    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
-    + page: 1 (number, optional) - #INT The page to request from the collection.
-    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
@@ -145,9 +146,9 @@ This returns an excel document as results.
 ## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby}]
 
 + Parameters
-    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
-    + page: 1 (number, optional) - #INT The page to request from the collection.
-    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
@@ -159,9 +160,9 @@ This returns an excel document as results.
 ## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby}]
 
 + Parameters
-    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
-    + page: 1 (number, optional) - #INT The page to request from the collection.
-    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
@@ -173,9 +174,9 @@ This returns an excel document as results.
 ## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby}]
 
 + Parameters
-    + accountId: 2 (required, number) - #INT ID of the account in the form of an integer
-    + page: 1 (number, optional) - #INT The page to request from the collection.
-    + pagesize: 1000 (number, optional) - #INT The number of records to load in a page from the collection.
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
 
 ### GET
@@ -194,10 +195,10 @@ Represents a heartbeat response.
 + `reportdbvitalcheck`: true (boolean, required) - true if ReportDB is online
 
 ## Base Collection Response (object)
-+ `page`: 1 (number, required) - #INT The current page provided in the response data.
-+ `pageSize`: 1000 (number, required) - #INT The page size returned in the response data.
-+ `dataSize` (number, required) - #INT The total records returned in the response.
-+ `total` (number, required) - #INT The total number of records available in the collection.
++ `page`: 1 (number, required) - {INT} The current page provided in the response data.
++ `pageSize`: 1000 (number, required) - {INT} The page size returned in the response data.
++ `dataSize` (number, required) - {INT} The total records returned in the response.
++ `total` (number, required) - {INT} The total number of records available in the collection.
 
 ## Work Order Status (enum)
 + NewRequest (string)
@@ -213,7 +214,7 @@ Represents a heartbeat response.
 
 ## Asset Failure Reason (object)
 + `failureReason` (Failure Reason, required) - The failure reason for the asset failure reason.
-+ `count`: 0 (number, required) - #INT The number of failure reasons.
++ `count`: 0 (number, required) - {INT} The number of failure reasons.
 
 ## Asset Summary (object)
 + `asset` (Asset, required) - The asset for the asset summary.
@@ -235,7 +236,7 @@ Represents a heartbeat response.
 + `count` (Count, required) - The counts for the purpose summary.
 
 ## Asset (object)
-+ `id` (number, required) - #INT The unique ID for the asset.
++ `id` (number, required) - {INT} The unique ID for the asset.
 + `value` (string, required) - The name of the asset.
 + `isActive` (boolean, required) - IsActive check to ensure the asset is active.
 + `description` (string, optional) - The name of the asset.
@@ -248,25 +249,25 @@ Represents a heartbeat response.
 + `total` (number, required) - The total sum of all costs.
 
 ## Count (object)
-+ `workOrders` (number, required) - #INT The number of workorders.
++ `workOrders` (number, required) - {INT} The number of workorders.
 + `laborHours` (number, required) - The number of labor hours.
 
 ## Failure Detail (object)
-+ `failures` (number, required) - #INT The number of failures.
-+ `downtimeMinutes` (number, required) - #INT The number of downtime minutes.
++ `failures` (number, required) - {INT} The number of failures.
++ `downtimeMinutes` (number, required) - {INT} The number of downtime minutes.
 
 ## Failure Reason (object)
-+ `id` (number, required) - #INT The unique ID for the failure reason.
++ `id` (number, required) - {INT} The unique ID for the failure reason.
 + `name` (string, required) - The name of the failure reason.
 + `isActive` (boolean, required) - IsActive check to ensure the failure reason is active.
 
 ## Purpose (object)
-+ `id` (number, required) - #INT The unique ID for the purpose.
++ `id` (number, required) - {INT} The unique ID for the purpose.
 + `value` (string, required) - The name of the purpose.
 + `isActive` (boolean, required) - IsActive check to ensure the purpose is active.
 
 ## User (object)
-+ `id` (number, required) - #INT The unique ID that represents the user.
++ `id` (number, required) - {INT} The unique ID that represents the user.
 + `firstName` (string, required) - The first name of the user.
 + `lastName` (string, required) - The last name of the user.
 + `email` (string, required) - The email of the user.
