@@ -86,18 +86,18 @@ Work order export endpoint
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - A free form filter mechanism.
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
-    + assignees: 1 (array[number], optional) - Filter by assignees.
+    + assignees: 1 (array[number], optional) - {INT} Filter by assignees.
     + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
     + createdby: 1 (number, optional) - {INT} Filter by the user who created the work order.
-    + displayid: 123 (string, optional) - {INT} Filter by the display ID of the work order.
+    + displayid: 123 (string, optional) - Filter by the display ID of the work order.
     + priority: Low (array[Priority], optional) - Filter by the priority of work orders.
-    + purpose: 1 (array[number], optional) - Filter by the purpose of work orders.
+    + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
-    + requestedby: 1 (array[number], optional) - Filter by the work order requester.
+    + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
     + status: NewRequest (array[Work Order Status], optional) - Filter by the work order status.
-    + workcategory: 1 (array[number], optional) - Filter by the work category assigned to the work order.
+    + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
 
 ### GET
