@@ -57,6 +57,15 @@ None at this time
 ## Documentation Notes
 In Progress
 
+# Group System Information
+
+## System Information [/]
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (System Information)
+
 # Group Heartbeat
 Check health of dependent services
 
@@ -185,19 +194,10 @@ Work order export endpoint
     + Attributes (Base Collection Response)
         + `data` (array[Purpose Summary], required)
 
-# System Information
-
-## System Information [/]
-
-### GET
-
-+ Response 200 (application/json)
-    + Attributes (System Information)
-
 # Data Structures
 
 ## System Information (object)
-+ `application`: `Dude Unified Api` (string, required) - The name of the application.
++ `application`: `Dude Report Api` (string, required) - The name of the application.
 + `version` : `1.0.0.0` (string, required) - The assembly version.
 + `apiVersion` : `1.0.0.0` (string, required) - The API version.
 + `vitals` (Heartbeat, required) - The state of the system dependencies.
