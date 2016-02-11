@@ -185,7 +185,28 @@ Work order export endpoint
     + Attributes (Base Collection Response)
         + `data` (array[Purpose Summary], required)
 
+# System Information
+
+## System Information [/]
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (System Information)
+
 # Data Structures
+
+## System Information (object)
++ `application`: `Dude Unified Api` (string, required) - The name of the application.
++ `version` : `1.0.0.0` (string, required) - The assembly version.
++ `apiVersion` : `1.0.0.0` (string, required) - The API version.
++ `vitals` (Heartbeat, required) - The state of the system dependencies.
++ `links` (array[System Links], required) - The API routes.
+
+## System Links (object)
++ `endpoint` : `WorkOrder` (string, required) - The name of the endpoint.
++ `action` : `Get` (string, required) - The REST action.
++ `route` : `/accounts/{accountId}/workorders` (string, required) - The route to the endpoint.
 
 ## Heartbeat (object)
 Represents a heartbeat response.
