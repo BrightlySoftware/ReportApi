@@ -58,8 +58,10 @@ None at this time
 In Progress
 
 # Group System Information
+Check API System Information.
 
-## System Information [/]
+## S.I. Check [/]
+Retrieve api version, vitals, links, etc.
 
 ### GET
 
@@ -67,9 +69,9 @@ In Progress
     + Attributes (System Information)
 
 # Group Heartbeat
-Check health of dependent services
+Check health of dependent services.
 
-## Heartbeat [/heartbeat]
+## Heartbeat Check [/heartbeat]
 The heartbeat is exposed and provided to check for availability of the service.
 Any response that does not provide a ```200 OK``` response code should be treated as an error.
 
@@ -86,9 +88,10 @@ Any response that does not provide a ```200 OK``` response code should be treate
 
 
 # Group Export
+Check export endpoints.
 
 ## Work Orders [/accounts/{accountId}/export/workorders{?orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset}]
-Work order export endpoint
+This collection allows for workorder data to be returned as an excel document.
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -122,8 +125,10 @@ Work order export endpoint
             Content-Length:8306
 
 # Group Reports
+Check report endpoints.
 
 ## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby}]
+This collection allows for workorder data to be organized by asset failure reasons and return relevant counts.
 
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
@@ -139,6 +144,7 @@ Work order export endpoint
         + `data` (array[Asset Failure Reason], required)
 
 ## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby}]
+This collection allows for workorder data to be organized by asset and return relevant counts.
 
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
@@ -153,6 +159,7 @@ Work order export endpoint
         + `data` (array[Asset Summary], required)
 
 ## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby}]
+This collection allows for workorder data to be organized by assignee and return relevant counts.
 
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
@@ -167,6 +174,7 @@ Work order export endpoint
         + `data` (array[Assignee Summary], required)
 
 ## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby}]
+This collection allows for workorder data to be organized by overall failures and return relevant counts.
 
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
@@ -181,6 +189,7 @@ Work order export endpoint
         + `data` (array[Failure Summary], required)
 
 ## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby}]
+This collection allows for workorder data to be organized by purposes and return relevant counts.
 
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
@@ -197,6 +206,9 @@ Work order export endpoint
 # Data Structures
 
 ## System Information (object)
+Represents the System Information response.
+
+### Properties
 + `application`: `Dude Report Api` (string, required) - The name of the application.
 + `version` : `1.0.0.0` (string, required) - The assembly version.
 + `apiVersion` : `1.0.0.0` (string, required) - The API version.
@@ -204,9 +216,12 @@ Work order export endpoint
 + `links` (array[System Links], required) - The API routes.
 
 ## System Links (object)
-+ `endpoint` : `WorkOrder` (string, required) - The name of the endpoint.
+Represents the API routes.
+
+### Properties
++ `endpoint` : `AssigneeSummary` (string, required) - The name of the endpoint.
 + `action` : `Get` (string, required) - The REST action.
-+ `route` : `/accounts/{accountId}/workorders` (string, required) - The route to the endpoint.
++ `route` : `/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby}` (string, required) - The route to the endpoint.
 
 ## Heartbeat (object)
 Represents a heartbeat response.
@@ -216,79 +231,122 @@ Represents a heartbeat response.
 + `reportdbvitalcheck`: true (boolean, required) - true if ReportDB is online
 
 ## Base Collection Response (object)
+Represents a paged object.
+
+### Properties
 + `page`: 1 (number, required) - {INT} The current page provided in the response data.
 + `pageSize`: 1000 (number, required) - {INT} The page size returned in the response data.
-+ `dataSize` (number, required) - {INT} The total records returned in the response.
-+ `total` (number, required) - {INT} The total number of records available in the collection.
++ `dataSize`: 1000 (number, required) - {INT} The total records returned in the response.
++ `total`: 2000 (number, required) - {INT} The total number of records available in the collection.
 
 ## Work Order Status (enum)
+Represent work order status enums.
+
 + NewRequest (string)
 + WorkInProgress (string)
 + Completed (string)
 + Void (string)
 
 ## Priority (enum)
+Represents work order priority enums.
+
 + Low (string)
 + Medium (string)
 + High (string)
 + Emergency (string)
 
 ## Asset Failure Reason (object)
+Represents an asset failure reason object.
+
+### Properties
 + `failureReason` (Failure Reason, required) - The failure reason for the asset failure reason.
-+ `count`: 0 (number, required) - {INT} The number of failure reasons.
++ `count`: 5 (number, required) - {INT} The number of failure reasons.
 
 ## Asset Summary (object)
+Represents an asset summary object.
+
+### Properties
 + `asset` (Asset, required) - The asset for the asset summary.
 + `cost` (Cost, required) - The cost for the asset summary.
 + `count` (Count, required) - The counts for the asset summary.
 
 ## Assignee Summary (object)
+Represents an assignee summary object.
+
+### Properties
 + `assignee` (User, required) - The assignee user for the assignee summary.
 + `count` (Count, required) - The counts for the assignee summary.
 
 ## Failure Summary (object)
+Represents a failure summary object.
+
+### Properties
 + `asset` (Asset, required) - The asset for the failure summary.
 + `failureReason` (Failure Reason, required) - The failure reason for the failure summary.
 + `failureDetail` (Failure Detail, required) - The failure detail for the failure summary.
 
 ## Purpose Summary (object)
+Represents a purpose summary object.
+
+### Properties
 + `purpose` (Purpose, required) - The purpose for the purpose summary.
 + `cost` (Cost, required) - The cost for the purpose summary.
 + `count` (Count, required) - The counts for the purpose summary.
 
 ## Asset (object)
-+ `id` (number, required) - {INT} The unique ID for the asset.
-+ `value` (string, required) - The name of the asset.
-+ `isActive` (boolean, required) - IsActive check to ensure the asset is active.
-+ `description` (string, optional) - The name of the asset.
-+ `AncestorIdPath` (string, required) - The anscestor id path.
-+ `AncestorNamePath` (string, required) - The anscestor name path.
+Represents an asset with base properties.
+
+### Properties
++ `id`: 94020 (number, required) - {INT} The unique ID for the asset.
++ `value`: vbykbh (string, required) - The name of the asset.
++ `isActive`: true (boolean, required) - IsActive check to ensure the asset is active.
++ `description`: A New Asset (string, optional) - The name of the asset.
++ `AncestorIdPath`: /39 (string, required) - The anscestor id path.
++ `AncestorNamePath`: |igeujs (string, required) - The anscestor name path.
 
 ## Cost (object)
-+ `labor` (number, required) - The sum of labor costs.
-+ `purchase` (number, required) - The sum of purchase costs.
-+ `total` (number, required) - The total sum of all costs.
+Represents a cost object.
+
+### Properties
++ `labor`: 300.01 (number, required) - The sum of labor costs.
++ `purchase`: 200.01 (number, required) - The sum of purchase costs.
++ `total`: 500.02 (number, required) - The total sum of all costs.
 
 ## Count (object)
-+ `workOrders` (number, required) - {INT} The number of workorders.
-+ `laborHours` (number, required) - The number of labor hours.
+Represents a count object.
+
+### Properties
++ `workOrders`: 9 (number, required) - {INT} The number of workorders.
++ `laborHours`: 30 (number, required) - The number of labor hours.
 
 ## Failure Detail (object)
-+ `failures` (number, required) - {INT} The number of failures.
-+ `downtimeMinutes` (number, required) - {INT} The number of downtime minutes.
+Represents a failure detail object.
+
+### Properties
++ `failures`: 5 (number, required) - {INT} The number of failures.
++ `downtimeMinutes`: 300 (number, required) - {INT} The number of downtime minutes.
 
 ## Failure Reason (object)
-+ `id` (number, required) - {INT} The unique ID for the failure reason.
-+ `name` (string, required) - The name of the failure reason.
-+ `isActive` (boolean, required) - IsActive check to ensure the failure reason is active.
+Represents a failure reason with base properties.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The unique ID for the failure reason.
++ `name`: Accidental Damage (string, required) - The name of the failure reason.
++ `isActive`: true (boolean, required) - IsActive check to ensure the failure reason is active.
 
 ## Purpose (object)
-+ `id` (number, required) - {INT} The unique ID for the purpose.
-+ `value` (string, required) - The name of the purpose.
-+ `isActive` (boolean, required) - IsActive check to ensure the purpose is active.
+Represents a purpose with base properties.
+
+### Properties
++ `id`: 2 (number, required) - {INT} The unique ID for the purpose.
++ `value`: Evaluation (string, required) - The name of the purpose.
++ `isActive`: true (boolean, required) - IsActive check to ensure the purpose is active.
 
 ## User (object)
-+ `id` (number, required) - {INT} The unique ID that represents the user.
-+ `firstName` (string, required) - The first name of the user.
-+ `lastName` (string, required) - The last name of the user.
-+ `email` (string, required) - The email of the user.
+Represents a user with base properties.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the user.
++ `firstName`: John (string, required) - The first name of the user.
++ `lastName`: Smith (string, required) - The last name of the user.
++ `email`: john.smith@dudesolutions.io (string, required) - The email address of the user.
