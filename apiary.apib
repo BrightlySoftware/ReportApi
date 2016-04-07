@@ -103,12 +103,22 @@ This collection allows for workorder data to be returned as an excel document.
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
     + createdby: 1 (number, optional) - {INT} Filter by the user who created the work order.
     + displayid: 123 (string, optional) - Filter by the display ID of the work order.
-    + priority: Low (array[Priority], optional) - Filter by the priority of work orders.
+    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
+        + Members
+            + Low (string)
+            + Medium (string)
+            + High (string)
+            + Emergency (string)
     + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
     + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
-    + status: NewRequest (array[Work Order Status], optional) - Filter by the work order status.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
     + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
     + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
 
@@ -238,22 +248,6 @@ Represents a paged object.
 + `pageSize`: 1000 (number, required) - {INT} The page size returned in the response data.
 + `dataSize`: 1000 (number, required) - {INT} The total records returned in the response.
 + `total`: 2000 (number, required) - {INT} The total number of records available in the collection.
-
-## Work Order Status (enum)
-Represent work order status enums.
-
-+ NewRequest (string)
-+ WorkInProgress (string)
-+ Completed (string)
-+ Void (string)
-
-## Priority (enum)
-Represents work order priority enums.
-
-+ Low (string)
-+ Medium (string)
-+ High (string)
-+ Emergency (string)
 
 ## Asset Failure Reason (object)
 Represents an asset failure reason object.
