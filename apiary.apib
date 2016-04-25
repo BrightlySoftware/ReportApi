@@ -263,6 +263,8 @@ Represents an asset summary object.
 + `asset` (Asset, required) - The asset for the asset summary.
 + `cost` (Cost, required) - The cost for the asset summary.
 + `count` (Count, required) - The counts for the asset summary.
++ `assetChildren` (Report Data, required) - The report data for the asset summary.
++ `totalsWithChildren` (Report Data, required) - The report data for the asset summary.
 
 ## Assignee Summary (object)
 Represents an assignee summary object.
@@ -312,6 +314,13 @@ Represents a count object.
 ### Properties
 + `workOrders`: 9 (number, required) - {INT} The number of workorders.
 + `laborHours`: 30 (number, required) - The number of labor hours.
+
+## Report Data (object)
+Represents a report data object.
+
+### Properties
++ `cost` (Cost, required) - The costs of the report data.
++ `count` (Count, required) - The counts of the report data.
 
 ## Failure Detail (object)
 Represents a failure detail object.
