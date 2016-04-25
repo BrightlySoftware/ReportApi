@@ -134,6 +134,22 @@ This collection allows for workorder data to be returned as an excel document.
             Content-Disposition:attachment; filename=WorkOrderExport_2016-01-22.xlsx
             Content-Length:8306
 
+# Group Dashboard
+Dashboard endpoints
+
+## On Time Ratio [/accounts/{accountId}/dashboard/ontimeratio{?startDate&endDate}]
+This endpoint returns counts of work orders on time and over due for the given time frame base on scheduled date.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + startDate: `2015-01-01T00:00:00.123Z` (string, required) - The start date and time in ISO-8601
+    + endDate: `2015-01-07T00:00:00.123Z` (string, required) - The end date and time in ISO-8601
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (On Time Ratio)
+
 # Group Reports
 Check report endpoints.
 
@@ -353,3 +369,10 @@ Represents a user with base properties.
 + `firstName`: John (string, required) - The first name of the user.
 + `lastName`: Smith (string, required) - The last name of the user.
 + `email`: john.smith@dudesolutions.io (string, required) - The email address of the user.
+
+## On Time Ratio (object)
+Represents work orders on time or overdue.
+
+### Properties
++ `onTime`: 1 (number, required) - {INT} Count of on time work orders.
++ `overDue`: 1 (number, required) - {INT} Count of over due work orders.
