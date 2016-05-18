@@ -293,8 +293,10 @@ Represents an assignee summary object.
 Represents a failure summary object.
 
 ### Properties
-+ `asset` (Asset, required) - The asset for the failure summary.
-+ `failureDetail` (Failure Detail, required) - The failure detail for the failure summary.
++ `asset` (Asset, required) - The asset linked with this failure summary.
++ `self` (Failure Detail, required) - The asset's failure details.
++ `descendants` (Failure Detail, required) - The asset's descendants failure details.
++ `totals` (Failure Detail, required) - The asset's total failure details, including its descendants.
 
 ## Purpose Summary (object)
 Represents a purpose summary object.
