@@ -13,6 +13,9 @@ CSHARPDEFAULTNAMESPACE: DSI.SDK.Report
 JAVADEFAULTNAMESPACE: io.dudesolutions.report
 BRANDLABEL: Dude Solutions, Inc.
 USERAGENT: Dude SDK
+NULLIFY404: TRUE
+VALIDATEREQUIREDPARAMETERS: FALSE
+COLLECTPARAMETERS: TRUE
 
 # Dude Report Api
 ![Dude Solutions](https://dudesolutions.com/assets/img/logo.png)
@@ -99,8 +102,8 @@ This collection allows for workorder data to be returned as an excel document.
     + q (string, optional) - A free form filter mechanism.
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
     + assignees: 1 (array[number], optional) - {INT} Filter by assignees.
-    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, starting from.
-    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by completion date, until.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
     + createdby: 1 (number, optional) - {INT} Filter by the user who created the work order.
     + displayid: 123 (string, optional) - Filter by the display ID of the work order.
     + priority: Low (enum[string], optional) - Filter by the priority of work orders.
@@ -110,8 +113,8 @@ This collection allows for workorder data to be returned as an excel document.
             + High (string)
             + Emergency (string)
     + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
-    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - Filter by request date, starting from.
-    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - Filter by the request date, until.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
     + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
     + status: NewRequest (enum[string], optional) - Filter by the work order status.
         + Members
@@ -142,8 +145,8 @@ This endpoint returns counts of work orders on time and over due for the given t
 
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
-    + startDate: `2015-01-01T00:00:00.123Z` (string, required) - The start date and time in ISO-8601
-    + endDate: `2015-01-07T00:00:00.123Z` (string, required) - The end date and time in ISO-8601
+    + startDate: `2015-01-01T00:00:00.123Z` (string, required) - {DATETIME} The start date and time in ISO-8601
+    + endDate: `2015-01-07T00:00:00.123Z` (string, required) - {DATETIME} The end date and time in ISO-8601
 
 ### GET
 
