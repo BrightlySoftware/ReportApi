@@ -232,6 +232,23 @@ This collection allows for workorder data to be organized by purposes and return
     + Attributes (Base Collection Response)
         + `data` (array[Purpose Summary], required)
 
+# Group PDF
+PDF export endpoints.
+
+## Work Order PDF Export [/accounts/{accountId}/pdf/workorders/{workOrderId}{?timeZone}]
+This endpoint returns a work order in a printable PDF format.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer.
+    + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer.
+    + timeZone: Etc/UTC (string, optional) - A string denoting the time zone.
+
+### GET
+
++ Response 200 (application/pdf)
+{HttpResponse}
+    + Attributes(Binary)
+
 # Data Structures
 
 ## System Information (object)
