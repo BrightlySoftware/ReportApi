@@ -298,8 +298,8 @@ Represents an asset summary object.
 + `asset` (Asset, required) - The asset for the asset summary.
 + `cost` (Cost, required) - The cost for the asset summary.
 + `count` (Count, required) - The counts for the asset summary.
-+ `assetChildren` (Report Data, required) - The report data for the asset summary.
-+ `totalsWithChildren` (Report Data, required) - The report data for the asset summary.
++ `assetDescendants` (Report Data, required) - The report data for the asset summary.
++ `totalsWithDescendants` (Report Data, required) - The report data for the asset summary.
 
 ## Assignee Summary (object)
 Represents an assignee summary object.
@@ -312,9 +312,10 @@ Represents an assignee summary object.
 Represents a failure summary object.
 
 ### Properties
-+ `asset` (Asset, required) - The asset for the failure summary.
-+ `failureReason` (Failure Reason, required) - The failure reason for the failure summary.
-+ `failureDetail` (Failure Detail, required) - The failure detail for the failure summary.
++ `asset` (Asset, required) - The asset linked with this failure summary.
++ `self` (Failure Detail, required) - The asset's failure details.
++ `descendants` (Failure Detail, required) - The asset's descendants failure details.
++ `totals` (Failure Detail, required) - The asset's total failure details, including its descendants.
 
 ## Purpose Summary (object)
 Represents a purpose summary object.
@@ -362,7 +363,6 @@ Represents a failure detail object.
 
 ### Properties
 + `failures`: 5 (number, required) - {INT} The number of failures.
-+ `downtimeMinutes`: 300 (number, required) - {INT} The number of downtime minutes.
 
 ## Failure Reason (object)
 Represents a failure reason with base properties.
