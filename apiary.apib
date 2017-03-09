@@ -16,9 +16,9 @@ USERAGENT: Dude SDK
 NULLIFY404: TRUE
 VALIDATEREQUIREDPARAMETERS: FALSE
 COLLECTPARAMETERS: TRUE
+ARRAYSERIALIZATION: Plain
 
 # Dude Report Api
-![Dude Solutions](https://dudesolutions.com/assets/img/logo.png)
 
 ## Reference
 Good reference document: https://raw.githubusercontent.com/apiaryio/api-blueprint/master/examples/Polls%20API.md
@@ -93,7 +93,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 # Group Export
 Check export endpoints.
 
-## Work Orders [/accounts/{accountId}/export/workorders{?orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset}]
+## Work Orders [/accounts/{accountId}/export/workorders{?orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,project}]
 This collection allows for workorder data to be returned as an excel document.
 
 + Parameters
@@ -101,7 +101,7 @@ This collection allows for workorder data to be returned as an excel document.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
     + q (string, optional) - A free form filter mechanism.
     + actiontaken: Fixed the chair (string, optional) - Filter by action taken text.
-    + assignees: 1 (array[number], optional) - {INT} Filter by assignees.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
     + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
     + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
     + createdby: 1 (number, optional) - {INT} Filter by the user who created the work order.
@@ -112,18 +112,19 @@ This collection allows for workorder data to be returned as an excel document.
             + Medium (string)
             + High (string)
             + Emergency (string)
-    + purpose: 1 (array[number], optional) - {INT} Filter by the purpose of work orders.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
     + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
     + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
-    + requestedby: 1 (array[number], optional) - {INT} Filter by the work order requester.
+    + requestedby: 1 (number, optional) - {ARRAY} {INT} Filter by the work order requester.
     + status: NewRequest (enum[string], optional) - Filter by the work order status.
         + Members
             + NewRequest (string)
             + WorkInProgress (string)
             + Completed (string)
             + Void (string)
-    + workcategory: 1 (array[number], optional) - {INT} Filter by the work category assigned to the work order.
-    + businessasset: 1 (array[number], optional) - Filter by the business asset assigned to the work order.
+    + workcategory: 1 (number, optional) - {ARRAY} {INT} Filter by the work category assigned to the work order.
+    + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+    + project: 1 (number, optional) - {ARRAY} Filter by the project assigned to the work order.
 
 ### GET
 
@@ -241,13 +242,26 @@ This endpoint returns a work order in a printable PDF format.
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer.
     + workOrderId: 12345 (required, number) - {INT} ID of the work order in the form of an integer.
-    + timeZone: Etc/UTC (string, optional) - A string denoting the time zone.
+    + timeZone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
 
 ### GET
 
 + Response 200 (application/pdf)
 {HttpResponse}
-    + Attributes(Binary)
+    
+## Work Orders PDF Export [/accounts/{accountId}/pdf/workorders/{?isTemporary}]
+This endpoint returns a URI to the generated PDF.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer.
+    + timeZone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + workOrderId: 12345 (array[number], required) - {INT} Filter by the work order IDs.
+    + isTemporary: false (boolean, optional) - Flag to indicate whether or not the file should be deleted during the next cleanup process. The default is false.
+
+### POST
+
++ Response 201 (application/json)
+    + Attributes(File Upload Info)
 
 # Data Structures
 
@@ -396,3 +410,10 @@ Represents work orders on time or overdue.
 ### Properties
 + `onTime`: 1 (number, required) - {INT} Count of on time work orders.
 + `overDue`: 1 (number, required) - {INT} Count of over due work orders.
+
+## File Upload Info (object)
+Represents a file resource with base properties.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The ID of the file.
++ `shareableUri`: https://file.dudesoln.com/file/public/rftuyinm3d546ft7uybinod4f578ybiunok68gyiunokm67g8yiunokm (string, required) - The URI that can be used to access the file without logging in.
