@@ -93,7 +93,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 # Group Export
 Check export endpoints.
 
-## Work Orders [/accounts/{accountId}/export/workorders{?orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,workcategory,businessasset,project}]
+## Work Orders [/accounts/{accountId}/export/workorders{?orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,worktype,businessasset,project}]
 This collection allows for workorder data to be returned as an excel document.
 
 + Parameters
@@ -123,7 +123,7 @@ This collection allows for workorder data to be returned as an excel document.
             + Completed (string)
             + Void (string)
             + OnHold (string)
-    + workcategory: 1 (number, optional) - {ARRAY} {INT} Filter by the work category assigned to the work order.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type assigned to the work order.
     + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
     + project: 1 (number, optional) - {ARRAY} Filter by the project assigned to the work order.
 
@@ -158,7 +158,7 @@ This endpoint returns counts of work orders on time and over due for the given t
 # Group Reports
 Check report endpoints.
 
-## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby}]
+## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
 This collection allows for workorder data to be organized by asset failure reasons and return relevant counts.
 
 + Parameters
@@ -167,6 +167,25 @@ This collection allows for workorder data to be organized by asset failure reaso
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+    + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+    + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
+            + OnHold (string)
+    + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
 
 ### GET
 
@@ -174,7 +193,7 @@ This collection allows for workorder data to be organized by asset failure reaso
     + Attributes (Base Collection Response)
         + `data` (array[Asset Failure Reason], required)
 
-## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby}]
+## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,priority,purpose,requestdatefrom,requestdateto,duedatefrom,duedateto,status,worktype,businessasset,assetrollup,timezone}]
 This collection allows for workorder data to be organized by asset and return relevant counts.
 
 + Parameters
@@ -182,6 +201,30 @@ This collection allows for workorder data to be organized by asset and return re
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
+        + Members
+            + Low (string)
+            + Medium (string)
+            + High (string)
+            + Emergency (string)
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+    + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+    + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
+            + OnHold (string)
+    + worktype: 1 (number, optional) - {ARRAY} Filter by the work type.
+    + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
 
 ### GET
 
@@ -189,7 +232,7 @@ This collection allows for workorder data to be organized by asset and return re
     + Attributes (Base Collection Response)
         + `data` (array[Asset Summary], required)
 
-## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby}]
+## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby,assigneeid}]
 This collection allows for workorder data to be organized by assignee and return relevant counts.
 
 + Parameters
@@ -197,6 +240,7 @@ This collection allows for workorder data to be organized by assignee and return
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + assigneeid: 1 (number, optional) - {INT} Filter by the assignee id.
 
 ### GET
 
@@ -204,7 +248,7 @@ This collection allows for workorder data to be organized by assignee and return
     + Attributes (Base Collection Response)
         + `data` (array[Assignee Summary], required)
 
-## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby}]
+## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
 This collection allows for workorder data to be organized by overall failures and return relevant counts.
 
 + Parameters
@@ -212,6 +256,25 @@ This collection allows for workorder data to be organized by overall failures an
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+    + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+    + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
+            + OnHold (string)
+    + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
 
 ### GET
 
@@ -219,7 +282,7 @@ This collection allows for workorder data to be organized by overall failures an
     + Attributes (Base Collection Response)
         + `data` (array[Failure Summary], required)
 
-## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby}]
+## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
 This collection allows for workorder data to be organized by purposes and return relevant counts.
 
 + Parameters
@@ -227,12 +290,65 @@ This collection allows for workorder data to be organized by purposes and return
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+    + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+    + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
+            + OnHold (string)
+    + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
 
 ### GET
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Base Collection Response)
         + `data` (array[Purpose Summary], required)
+
+## Work Type Summary Collection [/accounts/{accountId}/reports/worktype/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+This collection allows for workorder data to be organized by work type and return relevant counts.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+    + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+    + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
+            + OnHold (string)
+    + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Work Type Summary], required)
 
 # Group PDF
 PDF export endpoints.
@@ -341,6 +457,14 @@ Represents a purpose summary object.
 + `cost` (Cost, required) - The cost for the purpose summary.
 + `count` (Count, required) - The counts for the purpose summary.
 
+## Work Type Summary (object)
+Represents a work type object.
+
+### Properties
++ `workType` (Work Type, required) - The work type for the work type summary.
++ `cost` (Cost, required) - The cost for the work type summary.
++ `count` (Count, required) - The counts for the work type summary.
+
 ## Asset (object)
 Represents an asset with base properties.
 
@@ -395,6 +519,14 @@ Represents a purpose with base properties.
 + `id`: 2 (number, required) - {INT} The unique ID for the purpose.
 + `value`: Evaluation (string, required) - The name of the purpose.
 + `isActive`: true (boolean, required) - IsActive check to ensure the purpose is active.
+
+## Work Type (object)
+Represents a work type with base properties.
+
+### Properties
++ `id`: 2 (number, required) - {INT} The unique ID for the work type.
++ `name`: Evaluation (string, required) - The name of the work type.
++ `isActive`: true (boolean, required) - IsActive check to ensure the work type is active.
 
 ## User (object)
 Represents a user with base properties.
