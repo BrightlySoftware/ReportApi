@@ -94,7 +94,7 @@ Any response that does not provide a ```200 OK``` response code should be treate
 Check export endpoints.
 
 ## Work Orders [/accounts/{accountId}/export/workorders{?orderby,q,actiontaken,assignees,completiondatefrom,completiondateto,createdby,displayid,priority,purpose,requestdatefrom,requestdateto,requestedby,status,worktype,businessasset,project}]
-This collection allows for workorder data to be returned as an excel document.
+This collection allows for workorder data to be returned as an Excel document.
 
 + Parameters
     + accountId: 1 (required, number) - {INT} ID of the account in the form of an integer
@@ -137,6 +137,163 @@ This collection allows for workorder data to be returned as an excel document.
             Cache-Control:no-cache
             Connection:keep-alive
             Content-Disposition:attachment; filename=WorkOrderExport_2016-01-22.xlsx
+            Content-Length:8306
+
+## Work Orders By Purpose [/accounts/{accountId}/export/workordersbypurpose{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+This collection allows for workorder data to be organized by purposes with relevant counts and returned as an Excel document.
+
+     + Parameters
+         + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+         + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+         + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+         + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+         + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+         + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+         + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+         + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+         + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+         + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+         + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+         + status: NewRequest (enum[string], optional) - Filter by the work order status.
+             + Members
+                 + NewRequest (string)
+                 + WorkInProgress (string)
+                 + Completed (string)
+                 + Void (string)
+                 + OnHold (string)
+         + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+         + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+         + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
+### GET
+
++ Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+    This returns an excel document as results. {HTTPRESPONSE}
+
+    + Headers
+
+            Cache-Control:no-cache
+            Connection:keep-alive
+            Content-Disposition:attachment; filename=WorkOrdersByPurpose_2016-01-22.xlsx
+            Content-Length:8306
+
+## Work Orders By Work Type [/accounts/{accountId}/export/workordersbyworktype{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+This collection allows for workorder data to be organized by work type with relevant counts and returned as an Excel document.
+
+     + Parameters
+         + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+         + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+         + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+         + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+         + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+         + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+         + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+         + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+         + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+         + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+         + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+         + status: NewRequest (enum[string], optional) - Filter by the work order status.
+             + Members
+                 + NewRequest (string)
+                 + WorkInProgress (string)
+                 + Completed (string)
+                 + Void (string)
+                 + OnHold (string)
+         + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+         + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+         + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
+### GET
+
++ Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+    This returns an excel document as results. {HTTPRESPONSE}
+
+    + Headers
+
+            Cache-Control:no-cache
+            Connection:keep-alive
+            Content-Disposition:attachment; filename=WorkOrdersByWorkType_2016-01-22.xlsx
+            Content-Length:8306
+
+## Failures By Asset [/accounts/{accountId}/export/failuresbyasset{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+This collection allows for failure data to be organized by asset with relevant counts and returned as an Excel document.
+
+     + Parameters
+         + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+         + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+         + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+         + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+         + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+         + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+         + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+         + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+         + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+         + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+         + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+         + status: NewRequest (enum[string], optional) - Filter by the work order status.
+             + Members
+                 + NewRequest (string)
+                 + WorkInProgress (string)
+                 + Completed (string)
+                 + Void (string)
+                 + OnHold (string)
+         + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+         + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+         + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
+### GET
+
++ Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+    This returns an excel document as results. {HTTPRESPONSE}
+
+    + Headers
+
+            Cache-Control:no-cache
+            Connection:keep-alive
+            Content-Disposition:attachment; filename=FailuresByAsset_2016-01-22.xlsx
+            Content-Length:8306
+
+## Work Orders By Asset [/accounts/{accountId}/export/workordersbyasset{?orderby,completiondatefrom,completiondateto,priority,purpose,requestdatefrom,requestdateto,duedatefrom,duedateto,status,worktype,businessasset,assetrollup,timezone}]
+This collection allows for workorder data to be organized by asset with relevant counts and returned as an Excel document.
+
+   + Parameters
+       + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+       + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+       + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+       + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+       + priority: Low (enum[string], optional) - Filter by the priority of work orders.
+           + Members
+               + Low (string)
+               + Medium (string)
+               + High (string)
+               + Emergency (string)
+       + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+       + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+       + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+       + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+       + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+       + status: NewRequest (enum[string], optional) - Filter by the work order status.
+           + Members
+               + NewRequest (string)
+               + WorkInProgress (string)
+               + Completed (string)
+               + Void (string)
+               + OnHold (string)
+       + worktype: 1 (number, optional) - {ARRAY} Filter by the work type.
+       + businessasset: 1 (number, optional) - {ARRAY} Filter by the business asset assigned to the work order.
+       + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+       + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
+### GET
+
++ Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+    This returns an excel document as results. {HTTPRESPONSE}
+
+    + Headers
+
+            Cache-Control:no-cache
+            Connection:keep-alive
+            Content-Disposition:attachment; filename=FailuresByAsset_2016-01-22.xlsx
             Content-Length:8306
 
 # Group Dashboard
