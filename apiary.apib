@@ -178,7 +178,7 @@ This collection allows for workorder data to be organized by purposes with relev
             Content-Disposition:attachment; filename=WorkOrdersByPurpose_2016-01-22.xlsx
             Content-Length:8306
 
-## Work Orders By Work Type [/accounts/{accountId}/export/workordersbyworktype{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+## Work Orders By Work Type [/accounts/{accountId}/export/workordersbyworktype{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by work type with relevant counts and returned as an Excel document.
 
 + Parameters
@@ -203,6 +203,7 @@ This collection allows for workorder data to be organized by work type with rele
     + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
 
 ### GET
 
@@ -216,7 +217,7 @@ This collection allows for workorder data to be organized by work type with rele
             Content-Disposition:attachment; filename=WorkOrdersByWorkType_2016-01-22.xlsx
             Content-Length:8306
 
-## Failures By Asset [/accounts/{accountId}/export/failuresbyasset{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+## Failures By Asset [/accounts/{accountId}/export/failuresbyasset{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assingees}]
 This collection allows for failure data to be organized by asset with relevant counts and returned as an Excel document.
 
      + Parameters
@@ -241,6 +242,7 @@ This collection allows for failure data to be organized by asset with relevant c
          + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
          + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
          + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+         + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
 
 ### GET
 
@@ -316,12 +318,12 @@ This endpoint returns counts of work orders on time and over due for the given t
 # Group Reports
 Check report endpoints.
 
-## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by asset failure reasons and return relevant counts.
 
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
-    + assetId: 1 (required, number) {INT} ID of the asset in the form of an integer
+    + assetId: 1 (required, number) - {INT} ID of the asset in the form of an integer
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
@@ -344,6 +346,7 @@ This collection allows for workorder data to be organized by asset failure reaso
     + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
 
 ### GET
 
@@ -351,7 +354,43 @@ This collection allows for workorder data to be organized by asset failure reaso
     + Attributes (Base Collection Response)
         + `data` (array[Asset Failure Reason], required)
 
-## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,priority,purpose,requestdatefrom,requestdateto,duedatefrom,duedateto,status,worktype,businessasset,assetrollup,timezone}]
+## Asset Work Type Collection [/accounts/{accountId}/reports/assets/{assetId}/worktypes{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
+This collection allows for workorder data to be organized by asset and work type then return relevant counts.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + assetId: 1 (required, number) - {INT} ID of the asset in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+    + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+    + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
+            + OnHold (string)
+    + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Asset Failure Reason], required)
+
+## Asset Summary Collection [/accounts/{accountId}/reports/assets/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,priority,purpose,requestdatefrom,requestdateto,duedatefrom,duedateto,status,worktype,businessasset,assignees,assetrollup,timezone}]
 This collection allows for workorder data to be organized by asset and return relevant counts.
 
 + Parameters
@@ -381,6 +420,7 @@ This collection allows for workorder data to be organized by asset and return re
             + OnHold (string)
     + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
     + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
 
@@ -406,7 +446,7 @@ This collection allows for workorder data to be organized by assignee and return
     + Attributes (Base Collection Response)
         + `data` (array[Assignee Summary], required)
 
-## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+## Failure Summary Collection [/accounts/{accountId}/reports/failures/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by overall failures and return relevant counts.
 
 + Parameters
@@ -433,6 +473,7 @@ This collection allows for workorder data to be organized by overall failures an
     + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
 
 ### GET
 
@@ -440,7 +481,7 @@ This collection allows for workorder data to be organized by overall failures an
     + Attributes (Base Collection Response)
         + `data` (array[Failure Summary], required)
 
-## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by purposes and return relevant counts.
 
 + Parameters
@@ -467,6 +508,7 @@ This collection allows for workorder data to be organized by purposes and return
     + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
 
 ### GET
 
@@ -474,7 +516,7 @@ This collection allows for workorder data to be organized by purposes and return
     + Attributes (Base Collection Response)
         + `data` (array[Purpose Summary], required)
 
-## Work Type Summary Collection [/accounts/{accountId}/reports/worktype/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+## Work Type Summary Collection [/accounts/{accountId}/reports/worktype/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by work type and return relevant counts.
 
 + Parameters
@@ -501,6 +543,7 @@ This collection allows for workorder data to be organized by work type and retur
     + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
 
 ### GET
 
@@ -508,7 +551,7 @@ This collection allows for workorder data to be organized by work type and retur
     + Attributes (Base Collection Response)
         + `data` (array[Work Type Summary], required)
 
-## Status Summary Collection [/accounts/{accountId}/reports/statuses/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+## Status Summary Collection [/accounts/{accountId}/reports/statuses/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by purposes and return relevant counts.
 
 + Parameters
@@ -535,6 +578,7 @@ This collection allows for workorder data to be organized by purposes and return
     + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
 
 ### GET
 
@@ -615,6 +659,13 @@ Represents an asset failure reason object.
 ### Properties
 + `failureReason` (Failure Reason, required) - The failure reason for the asset failure reason.
 + `count`: 5 (number, required) - {INT} The number of failure reasons.
+
+## Asset Work Type (object)
+Represents an asset work type object.
+
+### Properties
++ `workType` (Work Type, required) - The work type for the workorder associated to the asset.
++ `count`: 5 (number, required) - {INT} The number of work orders with this work type.
 
 ## Asset Summary (object)
 Represents an asset summary object.
