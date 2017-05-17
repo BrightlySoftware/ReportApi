@@ -516,6 +516,34 @@ This collection allows for workorder data to be organized by purposes and return
     + Attributes (Base Collection Response)
         + `data` (array[Purpose Summary], required)
 
+## Purpose Grand Totals[/accounts/{accountId}/reports/purposes/summary{?completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+Returns the summarized costs and counts of work orders with an associated purpose.
+
++ Parameters
+   + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+   + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+   + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+   + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+   + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+   + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+   + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+   + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+   + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+   + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+   + status: NewRequest (enum[string], optional) - Filter by the work order status.
+       + Members
+           + NewRequest (string)
+           + WorkInProgress (string)
+           + Completed (string)
+           + Void (string)
+           + OnHold (string)
+   + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
+   + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+   + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Report Data)
+
 ## Work Type Summary Collection [/accounts/{accountId}/reports/worktype/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by work type and return relevant counts.
 
