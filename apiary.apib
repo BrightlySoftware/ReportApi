@@ -481,7 +481,7 @@ This collection allows for workorder data to be organized by overall failures an
     + Attributes (Base Collection Response)
         + `data` (array[Failure Summary], required)
 
-## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
+## Purpose Summary Collection [/accounts/{accountId}/reports/purposes/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees,returnAverages}]
 This collection allows for workorder data to be organized by purposes and return relevant counts.
 
 + Parameters
@@ -509,6 +509,7 @@ This collection allows for workorder data to be organized by purposes and return
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
     + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+    + returnAverages: false (boolean, optional) - Flag to indicate whether to return the sum or average of the data. Defaults to false.
 
 ### GET
 
@@ -516,7 +517,7 @@ This collection allows for workorder data to be organized by purposes and return
     + Attributes (Base Collection Response)
         + `data` (array[Purpose Summary], required)
 
-## Purpose Grand Totals[/accounts/{accountId}/reports/purposes/summary{?completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone}]
+## Purpose Grand Totals[/accounts/{accountId}/reports/purposes/totals{?completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 Returns the summarized costs and counts of work orders with an associated purpose.
 
 + Parameters
@@ -540,6 +541,8 @@ Returns the summarized costs and counts of work orders with an associated purpos
    + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+   + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Report Data)
