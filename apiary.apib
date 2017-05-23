@@ -649,6 +649,20 @@ This endpoint returns a URI to the generated PDF.
 + Response 201 (application/json)
     + Attributes(File Upload Info)
 
+## Work Orders Summary Export [/accounts/{accountId}/pdf/workorders]
+This endpoint returns a URI to the generated work order summary PDF.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer.
+
+### POST
+
++ Request
+    + Attributes (Work Order PDF Filter)
+
++ Response 201 (application/json)
+    + Attributes(File Upload Info)
+
 # Data Structures
 
 ## System Information (object)
@@ -834,3 +848,10 @@ Represents a file resource with base properties.
 ### Properties
 + `id`: 1 (number, required) - {INT} The ID of the file.
 + `shareableUri`: https://file.dudesoln.com/file/public/rftuyinm3d546ft7uybinod4f578ybiunok68gyiunokm67g8yiunokm (string, required) - The URI that can be used to access the file without logging in.
+
+## Work Order PDF Filter (object)
+Represents the filter for work order PDFs
+
+### Properties
++ `timeZone`: `Etc/UTC` (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
++ `workOrderIds`: (array[number], required) - {INT} The IDs of the work orders to filter on.
