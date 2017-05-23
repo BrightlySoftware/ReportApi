@@ -547,7 +547,7 @@ Returns the summarized costs and counts of work orders with an associated purpos
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Report Data)
 
-## Work Type Summary Collection [/accounts/{accountId}/reports/worktype/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
+## Work Type Summary Collection [/accounts/{accountId}/reports/worktype/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees,returnAverages}]
 This collection allows for workorder data to be organized by work type and return relevant counts.
 
 + Parameters
@@ -575,6 +575,7 @@ This collection allows for workorder data to be organized by work type and retur
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
     + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+    + returnAverages: false (boolean, optional) - Flag to indicate whether to return the sum or average of the data. Defaults to false.
 
 ### GET
 
