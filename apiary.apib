@@ -430,6 +430,42 @@ This collection allows for workorder data to be organized by asset and return re
     + Attributes (Base Collection Response)
         + `data` (array[Asset Summary], required)
 
+## Asset Grand Totals [/accounts/{accountId}/reports/assets/totals{?completiondatefrom,completiondateto,priority,purpose,requestdatefrom,requestdateto,duedatefrom,duedateto,status,worktype,businessasset,assignees,assetrollup,timezone}]
+Returns the summarized costs and counts of assets.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+    + priority: Low (enum[string], optional) - Filter by the priority of work orders.
+        + Members
+            + Low (string)
+            + Medium (string)
+            + High (string)
+            + Emergency (string)
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+    + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+    + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
+            + OnHold (string)
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Asset Grand Totals)
+
 ## Assignee Summary Collection [/accounts/{accountId}/reports/assignees/summary{?page,pagesize,orderby,assigneeid}]
 This collection allows for workorder data to be organized by assignee and return relevant counts.
 
@@ -543,6 +579,7 @@ Returns the summarized costs and counts of work orders with an associated purpos
    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
 
+### GET
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Report Data)
@@ -582,6 +619,37 @@ This collection allows for workorder data to be organized by work type and retur
 + Response 200 (application/json; charset=utf-8)
     + Attributes (Base Collection Response)
         + `data` (array[Work Type Summary], required)
+
+## Work Type Grand Totals [/accounts/{accountId}/reports/worktype/totals{?completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees]
+Returns the summarized costs and counts of work orders with an associated work type.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + completiondatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, starting from.
+    + completiondateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by completion date, until.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + failurereason: 1 (number, optional) - {ARRAY} {INT} Filter by the failure reason of work orders.
+    + requestdatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by request date, starting from.
+    + requestdateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by the request date, until.
+    + duedatefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, starting from.
+    + duedateto: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by due date, until.
+    + status: NewRequest (enum[string], optional) - Filter by the work order status.
+        + Members
+            + NewRequest (string)
+            + WorkInProgress (string)
+            + Completed (string)
+            + Void (string)
+            + OnHold (string)
+    + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Report Data)
 
 ## Status Summary Collection [/accounts/{accountId}/reports/statuses/summary{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by purposes and return relevant counts.
@@ -855,3 +923,11 @@ Represents the filter for work order PDFs
 ### Properties
 + `timeZone`: `Etc/UTC` (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
 + `workOrderIds`: (array[number], required) - {INT} The IDs of the work orders to filter on.
+
+## Asset Grand Totals (object)
+Represents the summarized costs and counts of assets.
+
+### Properties
++ `asset` (Report Data, required) - The cost and count asset data.
++ `assetDescendants` (Report Data, required) - The cost and count asset descendant data.
++ `totalsWithDescendants` (Report Data, required) - The cost and count asset data with the descendant data.
