@@ -341,6 +341,30 @@ This collection allows for workorder data to be organized by asset and return re
     + Attributes (Base Collection Response)
         + `data` (array[Employee Summary], required)
 
+## Employee Labor Hours [/accounts/{accountId}/reports/{employeeId}/laborhours{?page,pagesize,orderby,datefrom,dateto,purpose,worktype,businessasset,assignees,assetrollup,timezone}]
+This collection allows for workorder data to be organized by asset and return relevant counts.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + employeeId: 180 (required, number) - {INT} ID of the employee to get labor totals for
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + datefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by date, starting from.
+    + dateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by date, until.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
+### GET
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Base Collection Response)
+        + `data` (array[Labor Hour Details], required)
+
 ## Asset Failure Reason Collection [/accounts/{accountId}/reports/assets/{assetId}/failures{?page,pagesize,orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
 This collection allows for workorder data to be organized by asset failure reasons and return relevant counts.
 
@@ -826,6 +850,17 @@ Represents an employee summary object.
 + `openWorkOrders` (number, required) - The number of open work orders the user has.
 + `completedWorkOrders` (number, required) - The number of work orders the user completed.
 + `laborHours` (number, required) - The number of labor hours the user spent.
+
+## Labor Hour Details (object)
+Represents employee labor hour details
+
+### Properties
+
++ `workOrderId` (number, required) - The work order id
++ `displayId` (number, required) - The work order id displayed to the user
++ `description` (string, required) - The decription of the work order
++ `workTypeName` (string, required) - The name of the work type
++ `laborHours` (number, required) - The total labor hours
 
 ## Asset Summary (object)
 Represents an asset summary object.
