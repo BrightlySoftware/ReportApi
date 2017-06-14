@@ -139,7 +139,7 @@ This collection allows for workorder data to be returned as an Excel document.
             Content-Disposition:attachment; filename=WorkOrderExport_2016-01-22.xlsx
             Content-Length:8306
 
-## Work Orders By Purpose [/accounts/{accountId}/export/workordersbypurpose{?orderby,completiondatefrom,completiondateto,assignees,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,Members,businessasset,assetrollup,timezone}]
+## Work Orders By Purpose [/accounts/{accountId}/export/workordersbypurpose{?orderby,completiondatefrom,completiondateto,assignees,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees,returnAverages}]
 This collection allows for workorder data to be organized by purposes with relevant counts and returned as an Excel document.
 
 + Parameters
@@ -165,6 +165,8 @@ This collection allows for workorder data to be organized by purposes with relev
     + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+    + returnAverages: false (boolean, optional) - Flag to indicate whether to return the sum or average of the data. Defaults to false.
 
 ### GET
 
@@ -178,7 +180,7 @@ This collection allows for workorder data to be organized by purposes with relev
             Content-Disposition:attachment; filename=WorkOrdersByPurpose_2016-01-22.xlsx
             Content-Length:8306
 
-## Work Orders By Work Type [/accounts/{accountId}/export/workordersbyworktype{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees}]
+## Work Orders By Work Type [/accounts/{accountId}/export/workordersbyworktype{?orderby,completiondatefrom,completiondateto,purpose,worktype,failurereason,requestdatefrom,requestdateto,duedatefrom,duedateto,status,businessasset,assetrollup,timezone,assignees,returnAverages}]
 This collection allows for workorder data to be organized by work type with relevant counts and returned as an Excel document.
 
 + Parameters
@@ -204,6 +206,7 @@ This collection allows for workorder data to be organized by work type with rele
     + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
     + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
     + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+    + returnAverages: false (boolean, optional) - Flag to indicate whether to return the sum or average of the data. Defaults to false.
 
 ### GET
 
