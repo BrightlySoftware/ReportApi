@@ -303,6 +303,35 @@ This collection allows for workorder data to be organized by asset with relevant
             Content-Disposition:attachment; filename=FailuresByAsset_2016-01-22.xlsx
             Content-Length:8306
 
+## Employee Productivity [/accounts/{accountId}/export/employeeproductivity{?page,pagesize,orderby,datefrom,dateto,purpose,worktype,businessasset,assignees,assetrollup,timezone}]
+This collection allows for aggregated labor hours and completed work order counts organized by employee and returned as an Excel document.
+
++ Parameters
+    + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Id desc (string, optional) - A string describing the ordering to perform on the collection.
+    + datefrom: `2015-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by date, starting from.
+    + dateto: `2016-01-01T00:00:00.000Z` (string, optional) - {DATETIME} Filter by date, until.
+    + purpose: 1 (number, optional) - {ARRAY} {INT} Filter by the purpose of work orders.
+    + worktype: 1 (number, optional) - {ARRAY} {INT} Filter by the work type.
+    + businessasset: 1 (number, optional) - {ARRAY} {INT} Filter by the business asset assigned to the work order.
+    + assignees: 1 (number, optional) - {ARRAY} {INT} Filter by assignees.
+    + assetrollup: false (boolean, optional) - Flag to indicate whether or not to include child asset data in the aggregates.
+    + timezone: Etc/UTC (string, optional) - A string denoting the time zone. The default is “Etc/UTC”.
+
+### GET
+
++ Response 200 (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+    This returns an excel document as results. {HTTPRESPONSE}
+
+    + Headers
+
+            Cache-Control:no-cache
+            Connection:keep-alive
+            Content-Disposition:attachment; filename=EmployeeProductivity_2016-01-22.xlsx
+            Content-Length:8306
+
 # Group Dashboard
 Dashboard endpoints
 
@@ -323,7 +352,7 @@ This endpoint returns counts of work orders on time and over due for the given t
 Check report endpoints.
 
 ## Employee Summary Collection [/accounts/{accountId}/reports/employees/summary{?page,pagesize,orderby,datefrom,dateto,purpose,worktype,businessasset,assignees,assetrollup,timezone}]
-This collection allows for workorder data to be organized by asset and return relevant counts.
+This collection allows for workorder data to be organized by employee and return relevant counts.
 
 + Parameters
     + accountId: 2 (required, number) - {INT} ID of the account in the form of an integer
